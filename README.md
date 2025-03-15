@@ -12,22 +12,77 @@ Scalable design for future enhancements and new features.
 ## Purpose
 The primary goal of this project was to apply and solidify my understanding of OOP principles such as:
 
-Encapsulation
+-`Encapsulation`
 
-Inheritance
+-`Inheritance`
 
-Polymorphism
+-`Polymorphism`
 
-Abstraction
+-`Abstraction`
 
 ## Technologies Used
 Language: [Specify programming language used, e.g., Python, Java, C++]
 
-Libraries/Frameworks: [If applicable, mention any libraries or frameworks]
+Libraries/Frameworks: Android SDK
 
 ## Code Snippet
-(Coming soon! I'll add a concise example once the code is shared.)
+### Snake Class - Movement and Growth
+``` java
+public void move() {
+    for (int i = segments.size() - 1; i > 0; i--) {
+        segments.get(i).x = segments.get(i - 1).x;
+        segments.get(i).y = segments.get(i - 1).y;
+    }
+    Segment head = segments.get(0);
+    switch (direction) {
+        case Direction.UP: head.y -= UNIT_SIZE; break;
+        case Direction.DOWN: head.y += UNIT_SIZE; break;
+        case Direction.LEFT: head.x -= UNIT_SIZE; break;
+        case Direction.RIGHT: head.x += UNIT_SIZE; break;
+    }
+}
+```
+### Food Class - Spawn Functionality
+```java
+public void spawn() {
+    x = (random.nextInt(screenWidth / UNIT_SIZE)) * UNIT_SIZE;
+    y = (random.nextInt(screenHeight / UNIT_SIZE)) * UNIT_SIZE;
+}
+```
+### GameView Class - Core Game Loop
+```java
+@Override
+public void run() {
+    while (isPlaying) {
+        long startTime = System.currentTimeMillis();
+        update();
+        draw();
+        long duration = System.currentTimeMillis() - startTime;
+        long sleepTime = (1000 / FRAME_RATE) - duration;
+        if (sleepTime > 0) {
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
 
+```
+### MainActivity Class - Setting Up the Game View
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    GameView gameView = new GameView(this);
+    FrameLayout gameFrame = findViewById(R.id.gameFrame);
+    gameFrame.addView(gameView);
+}
+
+```
 ## Future Enhancements
 Add levels with increasing difficulty.
 
