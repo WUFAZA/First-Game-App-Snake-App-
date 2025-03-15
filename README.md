@@ -96,4 +96,4 @@ Enable multiplayer support.
 Contributions are welcome! If you have ideas or improvements, feel free to open an issue or submit a pull request.
 
 ## License
-[Specify the license under which your code is shared.]
+This project is a casual learning project and is shared as-is. Feel free to use or modify the code for personal or educational purposes. No formal license is applied.
